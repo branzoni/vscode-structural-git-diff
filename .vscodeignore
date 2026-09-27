@@ -1,0 +1,12 @@
+.gitignore
+.vscode/**
+src/**
+tsconfig.json
+build.mjs
+*.vsix
+pnpm-lock.yaml
+node_modules/**
+docs/**
+dist/*.map
+dist/cli.js
+dist/runTests.js

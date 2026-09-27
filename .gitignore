@@ -1,0 +1,6 @@
+node_modules/
+dist/
+*.vsix
+docs/
+.DS_Store
+*.log

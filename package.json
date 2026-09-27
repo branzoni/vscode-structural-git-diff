@@ -1,0 +1,170 @@
+{
+  "name": "structural-git-diff",
+  "displayName": "Structural Git Diff",
+  "description": "AST-aware structural Git diff viewer & repository navigator (PHP, TypeScript, JavaScript)",
+  "version": "0.2.0",
+  "license": "MIT",
+  "publisher": "branzoni",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/branzoni/vscode-structural-git-diff.git"
+  },
+  "homepage": "https://github.com/branzoni/vscode-structural-git-diff#readme",
+  "bugs": {
+    "url": "https://github.com/branzoni/vscode-structural-git-diff/issues"
+  },
+  "icon": "resources/icon.png",
+  "keywords": [
+    "git",
+    "diff",
+    "structural-diff",
+    "ast",
+    "code-review",
+    "php",
+    "typescript",
+    "javascript"
+  ],
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "SCM Providers"
+  ],
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "structuralDiffContainer",
+          "title": "Structural Git Diff",
+          "icon": "resources/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "structuralDiffContainer": [
+        {
+          "id": "structuralDiffExplorer",
+          "name": "Git Navigator"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "structuralDiff.openDiff",
+        "title": "Open Structural Diff",
+        "icon": "$(git-compare)"
+      },
+      {
+        "command": "structuralDiff.openCommitDiff",
+        "title": "Open Commit Diff",
+        "icon": "$(git-commit)"
+      },
+      {
+        "command": "structuralDiff.switchBranch",
+        "title": "Switch Git Branch",
+        "icon": "$(git-branch)"
+      },
+      {
+        "command": "structuralDiff.refreshExplorer",
+        "title": "Refresh Git Explorer",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "structuralDiff.checkoutBranch",
+        "title": "Checkout Branch",
+        "icon": "$(check)"
+      },
+      {
+        "command": "structuralDiff.loadMoreCommits",
+        "title": "Load More Commits"
+      },
+      {
+        "command": "structuralDiff.commitChanges",
+        "title": "Commit Working Changes",
+        "icon": "$(git-commit)"
+      },
+      {
+        "command": "structuralDiff.editFile",
+        "title": "Edit File",
+        "icon": "$(edit)"
+      }
+    ],
+    "menus": {
+      "view/item/context": [
+        {
+          "command": "structuralDiff.checkoutBranch",
+          "when": "view == structuralDiffExplorer && viewItem == localBranch",
+          "group": "inline"
+        },
+        {
+          "command": "structuralDiff.commitChanges",
+          "when": "view == structuralDiffExplorer && viewItem == categoryWorking",
+          "group": "inline"
+        },
+        {
+          "command": "structuralDiff.editFile",
+          "when": "view == structuralDiffExplorer && (viewItem == workingFile || viewItem == commitFile)",
+          "group": "inline"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "structuralDiff.switchBranch",
+          "when": "view == structuralDiffExplorer",
+          "group": "navigation@1"
+        },
+        {
+          "command": "structuralDiff.refreshExplorer",
+          "when": "view == structuralDiffExplorer",
+          "group": "navigation@2"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "structuralDiff.openDiff",
+          "group": "navigation"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "structuralDiff.openDiff",
+          "group": "7_modification"
+        }
+      ],
+      "scm/resourceState/context": [
+        {
+          "command": "structuralDiff.openDiff",
+          "when": "scmResourceState == dirty",
+          "group": "inline"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check src/",
+    "format": "biome format --write src/",
+    "build": "node build.mjs",
+    "watch": "node build.mjs --watch",
+    "package": "npx @vscode/vsce package --no-dependencies",
+    "test": "node build.mjs && node dist/runTests.js",
+    "test-cli": "node dist/cli.js"
+  },
+  "dependencies": {
+    "diff": "7.0.0",
+    "php-parser": "3.2.2"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.14",
+    "@types/diff": "^7.0.0",
+    "@types/node": "^22.0.0",
+    "@types/vscode": "^1.85.0",
+    "esbuild": "0.28.2",
+    "typescript": "^5.6.0"
+  }
+}
