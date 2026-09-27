@@ -51,6 +51,19 @@ For non-code files (Markdown, JSON, YAML, CSS, HTML, SQL, etc.), it provides the
 
 ---
 
+## Installation
+
+### From GitHub Releases (Recommended)
+1. Download the latest `structural-git-diff-*.vsix` package from the [Releases](https://github.com/branzoni/vscode-structural-git-diff/releases) page.
+2. Install it into VS Code using either method:
+   - **Via VS Code UI:** Open the **Extensions** view (`Ctrl+Shift+X` or `Cmd+Shift+X`), click the **`...`** menu in the top-right corner of the Extensions panel, choose **Install from VSIX...**, and select the downloaded file.
+   - **Via Terminal:**
+     ```bash
+     code --install-extension structural-git-diff-0.2.0.vsix
+     ```
+
+---
+
 ## Usage
 
 ### Opening Diffs
